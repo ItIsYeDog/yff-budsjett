@@ -95,5 +95,3 @@ PengePlanen er en webapplikasjon designet for å hjelpe brukere med å få overs
 *   Mer detaljerte rapporter og statistikk.
 
 ---
-
-Denne README-filen gir en god oversikt over prosjektet ditt. Du kan justere og legge til mer detaljer etter behov.
