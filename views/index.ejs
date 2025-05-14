@@ -1,0 +1,101 @@
+<%- include('partials/header') %>
+
+<div class="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
+        <div class="text-center">
+            <h1 class="text-5xl tracking-tight font-extrabold text-gray-900 sm:text-6xl md:text-7xl">
+                <span class="block">Ta kontroll over</span>
+                <span class="block text-blue-600">økonomien din</span>
+            </h1>
+            <p class="mt-6 max-w-2xl mx-auto text-lg text-gray-600 sm:text-xl md:mt-8 md:text-2xl">
+                Enkel budsjettering, smarte innsikter og full oversikt over din personlige økonomi. 
+                Planlegg fremtiden din med selvtillit.
+            </p>
+            <div class="mt-8 flex justify-center space-x-4">
+                <a href="/auth/register" class="px-8 py-3 text-lg font-medium text-white bg-blue-600 rounded-md shadow hover:bg-blue-700">
+                    Kom i gang
+                </a>
+                <a href="/auth/login" class="px-8 py-3 text-lg font-medium text-blue-600 bg-white border border-gray-300 rounded-md shadow hover:bg-gray-50">
+                    Logg inn
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-gray-50 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-base font-semibold tracking-wide text-blue-600 uppercase">Hvordan det fungerer</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    Kom i gang på 3 enkle steg
+                </p>
+            </div>
+            <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="flex items-center justify-center h-16 w-16 mx-auto rounded-full bg-blue-600 text-white">
+                        <span class="text-2xl font-bold">1</span>
+                    </div>
+                    <h3 class="mt-4 text-lg font-medium text-gray-900">Registrer deg</h3>
+                    <p class="mt-2 text-base text-gray-500">Opprett en konto på få minutter og kom i gang med budsjettering.</p>
+                </div>
+                <div class="text-center">
+                    <div class="flex items-center justify-center h-16 w-16 mx-auto rounded-full bg-blue-600 text-white">
+                        <span class="text-2xl font-bold">2</span>
+                    </div>
+                    <h3 class="mt-4 text-lg font-medium text-gray-900">Legg til transaksjoner</h3>
+                    <p class="mt-2 text-base text-gray-500">Fyll inn dine inntekter og utgifter for å få full oversikt.</p>
+                </div>
+                <div class="text-center">
+                    <div class="flex items-center justify-center h-16 w-16 mx-auto rounded-full bg-blue-600 text-white">
+                        <span class="text-2xl font-bold">3</span>
+                    </div>
+                    <h3 class="mt-4 text-lg font-medium text-gray-900">Se innsikt</h3>
+                    <p class="mt-2 text-base text-gray-500">Analyser dataen din med grafer og planlegg fremtiden din.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-base font-semibold tracking-wide text-blue-600 uppercase">Tilbakemeldinger</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    Hva brukerne våre sier
+                </p>
+            </div>
+            <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-6 rounded-lg shadow">
+                    <p class="text-lg text-gray-600">"Denne appen har hjulpet meg med å spare penger og få bedre kontroll over økonomien min!"</p>
+                    <p class="mt-4 text-sm font-medium text-gray-900">- Simon Tijanic, 17</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg shadow">
+                    <p class="text-lg text-gray-600">"Som småbedriftseier er dette verktøyet uvurderlig for å holde styr på utgiftene."</p>
+                    <p class="mt-4 text-sm font-medium text-gray-900">- Robert Gwiah Nagbe, 40</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg shadow">
+                    <p class="text-lg text-gray-600">"Enkel å bruke og veldig nyttig for å planlegge fremtiden min!"</p>
+                    <p class="mt-4 text-sm font-medium text-gray-900">- Junior Robert Gwiah Nagbe, 17</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-blue-600">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+                Klar til å ta kontroll over økonomien din?
+            </h2>
+            <p class="mt-4 text-lg leading-6 text-blue-200">
+                Registrer deg i dag og start reisen mot en bedre økonomisk fremtid.
+            </p>
+            <div class="mt-6">
+                <a href="/auth/register" class="px-6 py-3 text-lg font-medium text-blue-600 bg-white rounded-md shadow hover:bg-gray-100">
+                    Kom i gang nå
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

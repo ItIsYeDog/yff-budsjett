@@ -1,0 +1,44 @@
+<%- include('partials/header') %>
+
+<div class="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <%- include('partials/nav') %>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="bg-white rounded-xl shadow-sm p-6 md:p-8 border border-gray-100">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6 md:mb-8">Min Profil</h2>
+
+            <% if (error) { %>
+                <div class="mb-6 bg-red-50 border-l-4 border-red-500 p-4 rounded">
+                    <p class="text-red-700"><%= error %></p>
+                </div>
+            <% } %>
+            
+            <div class="space-y-6">
+                <div>
+                    <h3 class="text-lg font-medium text-gray-800">Navn</h3>
+                    <p class="mt-1 text-gray-600 text-lg"><%= user.name %></p>
+                </div>
+                <hr class="border-gray-200">
+                <div>
+                    <h3 class="text-lg font-medium text-gray-800">E-post</h3>
+                    <p class="mt-1 text-gray-600 text-lg"><%= user.email %></p>
+                </div>
+                <hr class="border-gray-200">
+                <div>
+                    <h3 class="text-lg font-medium text-gray-800">Medlem siden</h3>
+                    <p class="mt-1 text-gray-600 text-lg"><%= new Date(user.createdAt).toLocaleDateString('no-NO', { day: 'numeric', month: 'long', year: 'numeric' }) %></p>
+                </div>
+                
+                <!-- Fremtidig utvidelse:
+                <div class="pt-6">
+                    <a href="/settings/edit-profile" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        Rediger profil
+                    </a>
+                </div>
+                -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

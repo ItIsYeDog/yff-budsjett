@@ -1,0 +1,54 @@
+<%- include('partials/header') %>
+
+<div class="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <%- include('partials/nav') %>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Budsjettinnstillinger</h2>
+
+            <% if (error) { %>
+                <div class="mb-4 bg-red-50 border-l-4 border-red-500 p-4 rounded">
+                    <p class="text-red-700"><%= error %></p>
+                </div>
+            <% } %>
+
+            <% if (success) { %>
+                <div class="mb-4 bg-green-50 border-l-4 border-green-500 p-4 rounded">
+                    <p class="text-green-700">Innstillingene ble lagret!</p>
+                </div>
+            <% } %>
+
+            <form action="/settings/budget-limits" method="POST" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <% ['mat', 'transport', 'bolig', 'underholdning', 'shopping', 'regninger', 'sparing', 'annet'].forEach(category => { %>
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-gray-700">
+                                Budsjettgrense for <%= category %>
+                            </label>
+                            <div class="relative rounded-lg shadow-sm">
+                                <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500">kr</span>
+                                <input type="number" 
+                                       name="limits[<%= category %>]" 
+                                       value="<%= budgetLimits[category] || '' %>"
+                                       min="0" 
+                                       step="100"
+                                       class="w-full rounded-lg border-gray-300 pl-10 focus:border-blue-500 focus:ring-blue-500"
+                                       placeholder="Ingen grense">
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+
+                <div class="flex justify-end">
+                    <button type="submit" 
+                            class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        Lagre innstillinger
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

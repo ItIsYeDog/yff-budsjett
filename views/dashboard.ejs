@@ -1,0 +1,656 @@
+<%- include('partials/header') %>
+
+<div class="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <%- include('partials/nav') %>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Alerts -->
+        <% if (alert) { %>
+            <div class="mb-8 bg-red-50 border-l-4 border-red-500 p-4 rounded-lg shadow-sm">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-red-700"><%= alert %></p>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 transform transition-transform hover:scale-105 duration-300">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h3 class="text-gray-500 text-sm font-medium">Total Balanse</h3>
+                        <p class="text-3xl font-bold text-gray-900">kr <%= totalBalance.toLocaleString('no-NO') %></p>
+                    </div>
+                    <div class="p-3 bg-blue-50 rounded-lg">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2-1.343-2-3-2z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="flex items-center text-sm text-gray-600">
+                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                    </svg>
+                    Oppdatert <%= new Date().toLocaleDateString('no-NO') %>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 transform transition-transform hover:scale-105 duration-300">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h3 class="text-gray-500 text-sm font-medium">Inntekter</h3>
+                        <p class="text-3xl font-bold text-gray-900">kr <%= totalIncome.toLocaleString('no-NO') %></p>
+                    </div>
+                    <div class="p-3 bg-green-50 rounded-lg">
+                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="flex items-center text-sm text-green-600">
+                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    Denne måneden
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 transform transition-transform hover:scale-105 duration-300">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h3 class="text-gray-500 text-sm font-medium">Utgifter</h3>
+                        <p class="text-3xl font-bold text-gray-900">kr <%= totalExpenses.toLocaleString('no-NO') %></p>
+                    </div>
+                    <div class="p-3 bg-red-50 rounded-lg">
+                        <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0v-8m0 8l-8-8-4 4-6-6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="flex items-center text-sm text-red-600">
+                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 012 0v7.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                    Denne måneden
+                </div>
+            </div>
+        </div>
+
+        <!-- Modern Charts Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-medium text-gray-900">Inntekter vs Utgifter</h3>
+                    <div class="flex items-center space-x-2">
+                        <span class="inline-block w-3 h-3 rounded-full bg-green-500"></span>
+                        <span class="text-sm text-gray-600">Inntekter</span>
+                        <span class="inline-block w-3 h-3 rounded-full bg-red-500 ml-2"></span>
+                        <span class="text-sm text-gray-600">Utgifter</span>
+                    </div>
+                </div>
+                <div style="height: 300px;" class="relative"> 
+                    <canvas id="expenseChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-medium text-gray-900">Utgifter per kategori</h3>
+                    <button id="openCategoryDetailsBtn" class="text-sm text-blue-600 hover:text-blue-700">
+                        Se detaljer
+                    </button>
+                </div>
+                <div style="height: 300px;" class="relative">
+                    <canvas id="categoryChart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mb-8">
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+                <h3 class="text-lg font-medium text-gray-900 mb-4">Budsjettfremgang</h3>
+                <div style="position: relative; min-height: 500px; max-height: 1000px;">
+                    <canvas id="budgetProgressChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="mb-8">
+            <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+                <h2 class="text-lg font-medium text-gray-900 mb-4">Rask handling</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <button onclick="openTransactionModal()" 
+                        class="p-4 text-center rounded-lg border border-gray-200 hover:border-blue-500 hover:text-blue-600 transition-colors duration-200">
+                    <svg class="w-6 h-6 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                    </svg>
+                    Ny transaksjon
+                </button>
+                    <a href="/transactions/export/pdf" 
+                       class="p-4 text-center rounded-lg border border-gray-200 hover:border-blue-500 hover:text-blue-600 transition-colors duration-200">
+                        <svg class="w-6 h-6 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                        </svg>
+                        Last ned PDF
+                    </a>
+                    <a href="/transactions/export/csv"
+                       class="p-4 text-center rounded-lg border border-gray-200 hover:border-blue-500 hover:text-blue-600 transition-colors duration-200">
+                        <svg class="w-6 h-6 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        Last ned CSV
+                    </a>
+                    <a href="/settings" 
+                    class="p-4 text-center rounded-lg border border-gray-200 hover:border-blue-500 hover:text-blue-600 transition-colors duration-200">
+                        <svg class="w-6 h-6 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        Innstillinger
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <!-- Transaksjonshistorikk -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100">
+            <div class="p-6">
+                <h2 class="text-lg font-medium text-gray-900 mb-4">Transaksjonshistorikk</h2>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dato</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kategori</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Beskrivelse</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Beløp</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Handlinger</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <% transactions.forEach(transaction => { %>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    <%= transaction.date.toLocaleDateString('no-NO') %>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                                        <%= transaction.type === 'income' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' %>">
+                                        <%= transaction.type === 'income' ? 'Inntekt' : 'Utgift' %>
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    <%= transaction.category %>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <%= transaction.description || '-' %>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium <%= transaction.type === 'income' ? 'text-green-600' : 'text-red-600' %>">
+                                    kr <%= transaction.amount.toLocaleString('no-NO') %>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <form action="/transactions/delete/<%= transaction._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Er du sikker på at du vil slette denne transaksjonen?');">
+                                        <button type="submit" class="text-red-600 hover:text-red-800">Slett</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Transaction Modal -->
+<div id="transactionModal" 
+     class="fixed inset-0 backdrop-blur-sm bg-gray-900/50 hidden overflow-y-auto h-full w-full z-50 transition-opacity duration-300 ease-in-out flex items-center justify-center">
+    <div class="relative mx-auto p-4 sm:p-6 max-w-lg w-full transform transition-all duration-300 ease-in-out">
+        <div class="bg-white rounded-xl shadow-lg border border-gray-200">
+            <!-- Header -->
+            <div class="p-5 border-b border-gray-200">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <h3 class="text-lg font-semibold text-gray-800">Ny transaksjon</h3>
+                    </div>
+                    <button onclick="closeTransactionModal()" 
+                            class="text-gray-400 hover:text-gray-600 focus:outline-none rounded-full p-1 hover:bg-gray-100 transition-colors">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <form action="/transactions/add" method="POST" class="p-5 sm:p-6 space-y-5">
+                <!-- Type -->
+                <div class="space-y-1.5">
+                    <label class="text-sm font-medium text-gray-700 flex items-center">
+                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 12L3 8m4 4l4-8m-4 8l4 8m6-4v-4m0 4h4m-4-4H9m6 4H9"></path></svg>
+                        Type
+                    </label>
+                    <select name="type" required 
+                            class="w-full rounded-lg border-gray-300 bg-gray-50 shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200 py-2.5 px-3">
+                        <option value="">Velg type</option>
+                        <option value="income">Inntekt</option>
+                        <option value="expense">Utgift</option>
+                    </select>
+                </div>
+
+                <!-- Beløp -->
+                <div class="space-y-1.5">
+                    <label class="text-sm font-medium text-gray-700 flex items-center">
+                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        Beløp
+                    </label>
+                    <div class="relative rounded-lg shadow-sm">
+                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500 text-sm">kr</span>
+                        <input type="number" name="amount" required min="0" step="0.01"
+                               class="w-full rounded-lg border-gray-300 bg-gray-50 pl-9 focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200 py-2.5 px-3"
+                               placeholder="0.00">
+                    </div>
+                </div>
+
+                <!-- Kategori -->
+                <div class="space-y-1.5">
+                    <label class="text-sm font-medium text-gray-700 flex items-center">
+                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
+                        Kategori
+                    </label>
+                    <select name="category" required 
+                            class="w-full rounded-lg border-gray-300 bg-gray-50 shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200 py-2.5 px-3">
+                        <option value="">Velg kategori</option>
+                        <option value="lønn">Lønn</option>
+                        <option value="mat">Mat og drikke</option>
+                        <option value="transport">Transport</option>
+                        <option value="bolig">Bolig</option>
+                        <option value="underholdning">Underholdning</option>
+                        <option value="shopping">Shopping</option>
+                        <option value="regninger">Regninger</option>
+                        <option value="sparing">Sparing</option>
+                        <option value="annet">Annet</option>
+                    </select>
+                </div>
+
+                <!-- Dato -->
+                <div class="space-y-1.5">
+                    <label class="text-sm font-medium text-gray-700 flex items-center">
+                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        Dato
+                    </label>
+                    <input type="date" name="date" required
+                           class="w-full rounded-lg border-gray-300 bg-gray-50 shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200 py-2.5 px-3"
+                           value="<%= new Date().toISOString().split('T')[0] %>">
+                </div>
+
+                <!-- Beskrivelse -->
+                <div class="space-y-1.5">
+                    <label class="text-sm font-medium text-gray-700 flex items-center">
+                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>
+                        Beskrivelse
+                    </label>
+                    <textarea name="description" rows="3"
+                          class="w-full rounded-lg border-gray-300 bg-gray-50 shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200 py-2.5 px-3"
+                          placeholder="Legg til en beskrivelse (valgfritt)"></textarea>
+                </div>
+
+                <!-- Footer med knapper -->
+                <div class="flex justify-end space-x-3 pt-4">
+                    <button type="button" onclick="closeTransactionModal()"
+                            class="px-5 py-2.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 transition-colors duration-200 text-sm font-medium flex items-center space-x-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        <span>Avbryt</span>
+                    </button>
+                    <button type="submit"
+                            class="px-5 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 transform hover:scale-105 text-sm font-medium flex items-center space-x-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <span>Lagre transaksjon</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Category Details Modal -->
+<div id="categoryDetailsModal" 
+     class="fixed inset-0 backdrop-blur-sm bg-gray-800/40 hidden overflow-y-auto h-full w-full z-50 transition-all duration-200">
+    <div class="relative top-20 mx-auto p-8 max-w-2xl transform transition-all">
+        <div class="bg-white rounded-2xl shadow-xl">
+            <!-- Header -->
+            <div class="p-6 border-b border-gray-100">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-xl font-semibold text-gray-900">Detaljerte Utgifter per Kategori</h3>
+                    <button onclick="closeCategoryDetailsModal()" 
+                            class="text-gray-400 hover:text-gray-500 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="p-6">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dato</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kategori</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Beskrivelse</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Beløp</th>
+                            </tr>
+                        </thead>
+                        <tbody id="categoryDetailsTableBody" class="bg-white divide-y divide-gray-200">
+                            <!-- Rader blir satt inn her av JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Footer med lukkeknapp -->
+            <div class="flex justify-end p-6 border-t border-gray-100">
+                <button type="button" onclick="closeCategoryDetailsModal()"
+                        class="px-4 py-2 bg-white text-gray-700 rounded-lg border border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 transition-colors duration-200">
+                    Lukk
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const expenseCtx = document.getElementById('expenseChart').getContext('2d');
+    new Chart(expenseCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Inntekter', 'Utgifter'],
+            datasets: [{
+                data: [<%= totalIncome %>, <%= totalExpenses %>],
+                backgroundColor: ['#10B981', '#EF4444'],
+                borderRadius: 6
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) {
+                            return 'kr ' + value.toLocaleString('no-NO');
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+    new Chart(categoryCtx, {
+        type: 'doughnut',
+        data: {
+            labels: <%- JSON.stringify(categoryLabels) %>,
+            datasets: [{
+                data: <%- JSON.stringify(categoryAmounts) %>,
+                backgroundColor: [
+                    '#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#EC4899'
+                ],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    position: 'right',
+                    labels: {
+                        usePointStyle: true,
+                        padding: 20
+                    }
+                }
+            },
+            cutout: '70%'
+        }
+    });
+});
+
+// Modal functions
+function openTransactionModal() {
+    document.getElementById('transactionModal').classList.remove('hidden');
+    // Prevent scrolling på bakgrunnen
+    document.body.style.overflow = 'hidden';
+}
+
+function closeTransactionModal() {
+    document.getElementById('transactionModal').classList.add('hidden');
+    // Tillat scrolling igjen
+    document.body.style.overflow = 'auto';
+}
+
+// Lukk modal hvis man klikker utenfor
+document.getElementById('transactionModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeTransactionModal();
+    }
+});
+
+// Escape key for å lukke modal
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeTransactionModal();
+        closeCategoryDetailsModal(); // Lukk også denne modalen hvis den er åpen
+    }
+});
+
+// Category Details Modal functions
+async function openCategoryDetailsModal() {
+    const modal = document.getElementById('categoryDetailsModal');
+    const tableBody = document.getElementById('categoryDetailsTableBody');
+    
+    tableBody.innerHTML = '<tr><td colspan="4" class="text-center py-4 px-6">Laster detaljer...</td></tr>';
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+
+    try {
+        const response = await fetch('/transactions/category-chart-details'); 
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Kunne ikke hente transaksjonsdetaljer.');
+        }
+        const transactions = await response.json();
+
+        if (transactions.length === 0) {
+            tableBody.innerHTML = '<tr><td colspan="4" class="text-center py-4 px-6">Ingen utgiftstransaksjoner funnet for perioden som vises i diagrammet.</td></tr>';
+            return;
+        }
+
+        let rowsHtml = '';
+        transactions.forEach(transaction => {
+            rowsHtml += `
+                <tr class="hover:bg-gray-50">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${new Date(transaction.date).toLocaleDateString('no-NO')}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${transaction.category}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 max-w-xs truncate" title="${transaction.description || ''}">${transaction.description || '-'}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-red-600 text-right">kr ${transaction.amount.toLocaleString('no-NO', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                </tr>
+            `;
+        });
+        tableBody.innerHTML = rowsHtml;
+
+    } catch (error) {
+        console.error("Error fetching category details:", error);
+        tableBody.innerHTML = `<tr><td colspan="4" class="text-center py-4 px-6 text-red-600">Feil: ${error.message}</td></tr>`;
+    }
+}
+
+function closeCategoryDetailsModal() {
+    document.getElementById('categoryDetailsModal').classList.add('hidden');
+    if (!document.getElementById('transactionModal').classList.contains('hidden')) {
+        // Hvis transaksjonsmodalen fortsatt er åpen, ikke endre body overflow
+    } else {
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Event listener for "Se detaljer" knappen
+document.getElementById('openCategoryDetailsBtn').addEventListener('click', openCategoryDetailsModal);
+
+// Lukk category details modal hvis man klikker utenfor
+document.getElementById('categoryDetailsModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeCategoryDetailsModal();
+    }
+});
+
+// Data for budsjettfremgang-grafen
+const budgetLimitsData = <%- JSON.stringify(budgetLimits || []) %>;
+const categoryLabelsData = <%- JSON.stringify(categoryLabels || []) %>;
+const categoryAmountsData = <%- JSON.stringify(categoryAmounts || []) %>;
+
+const budgetProgressChartLabels = [];
+const budgetProgressChartSpents = []; // Faktisk brukt beløp
+const budgetProgressChartLimits = []; // Budsjettgrense
+const budgetProgressBackgroundColors = [];
+const budgetProgressBorderColors = [];
+
+let hasBudgetData = false;
+budgetLimitsData.forEach(budget => {
+    if (budget.limit > 0) {
+        hasBudgetData = true;
+        const categoryName = budget.category;
+        const limit = budget.limit;
+        let spentAmount = 0;
+
+        const categoryIndex = categoryLabelsData.indexOf(categoryName);
+        if (categoryIndex !== -1) {
+            spentAmount = categoryAmountsData[categoryIndex];
+        }
+
+        budgetProgressChartLabels.push(categoryName.charAt(0).toUpperCase() + categoryName.slice(1));
+        budgetProgressChartSpents.push(spentAmount);
+        budgetProgressChartLimits.push(limit);
+
+        const percentageSpent = (spentAmount / limit) * 100;
+
+        if (percentageSpent > 100) {
+            budgetProgressBackgroundColors.push('rgba(239, 68, 68, 0.6)'); // Rød (over budsjett)
+            budgetProgressBorderColors.push('rgba(220, 38, 38, 1)');
+        } else if (percentageSpent > 80) {
+            budgetProgressBackgroundColors.push('rgba(245, 158, 11, 0.6)'); // Oransje (nær budsjett)
+            budgetProgressBorderColors.push('rgba(217, 119, 6, 1)');
+        } else {
+            budgetProgressBackgroundColors.push('rgba(16, 185, 129, 0.6)'); // Grønn (innenfor budsjett)
+            budgetProgressBorderColors.push('rgba(5, 150, 105, 1)');
+        }
+    }
+});
+
+const budgetProgressCtx = document.getElementById('budgetProgressChart').getContext('2d');
+if (hasBudgetData) {
+    new Chart(budgetProgressCtx, {
+        type: 'bar',
+        data: {
+            labels: budgetProgressChartLabels,
+            datasets: [
+                {
+                    label: 'Brukt beløp',
+                    data: budgetProgressChartSpents,
+                    backgroundColor: budgetProgressBackgroundColors,
+                    borderColor: budgetProgressBorderColors,
+                    borderWidth: 1
+                },
+                {
+                    label: 'Budsjettgrense',
+                    data: budgetProgressChartLimits,
+                    type: 'line', // Vis grensen som en linje eller annen type bar
+                    borderColor: 'rgba(107, 114, 128, 0.5)', // Grå
+                    backgroundColor: 'rgba(107, 114, 128, 0.1)',
+                    borderWidth: 2,
+                    pointRadius: 0, // Skjul punkter på linjen hvis ønskelig
+                    fill: false,
+                     // For å unngå at linjen påvirker stablingen hvis du bruker stablede søyler
+                    order: 0 // Sørg for at linjen tegnes oppå søylene
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            indexAxis: 'y', // Horisontale søyler gjør det ofte lettere å lese kategorinavn
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) {
+                            return 'kr ' + value.toLocaleString('no-NO');
+                        }
+                    }
+                },
+                y: {
+                    ticks: {
+                        autoSkip: false // Vis alle kategorietiketter
+                    }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.x !== null) {
+                                label += 'kr ' + context.parsed.x.toLocaleString('no-NO');
+                            }
+                            // Legg til prosentandel brukt
+                            if (context.dataset.label === 'Brukt beløp') {
+                                const spent = context.parsed.x;
+                                const limit = budgetProgressChartLimits[context.dataIndex];
+                                if (limit > 0) {
+                                    const percentage = ((spent / limit) * 100).toFixed(1);
+                                    label += ` (${percentage}%)`;
+                                }
+                            }
+                            return label;
+                        }
+                    }
+                },
+                legend: {
+                    position: 'top',
+                }
+            }
+        }
+    });
+} else {
+    // Vis en melding hvis ingen budsjettdata er tilgjengelig
+    const canvasContainer = budgetProgressCtx.canvas.parentNode;
+    canvasContainer.innerHTML = '<p class="text-center text-gray-500 py-8">Ingen budsjettgrenser er satt. Du kan sette dem under <a href="/settings" class="text-blue-600 hover:underline">Innstillinger</a>.</p>';
+}
+</script>
+
+<%- include('partials/footer') %>
